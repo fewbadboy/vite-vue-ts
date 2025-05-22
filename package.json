@@ -9,7 +9,7 @@
     "preview": "vite preview",
     "svgo": "svgo -f src/icons/svg --config=src/icons/svgo.config.cjs",
     "prepare": "husky",
-    "oxlint": "oxlint",
+    "oxlint": "oxlint --fix --fix-suggestions --fix-dangerously",
     "lint-staged": "lint-staged",
     "addition-commit": "git add . && git commit --amend --no-edit"
   },

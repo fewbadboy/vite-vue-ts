@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { RouteLocationRaw } from 'vue-router'
+
 import {
   Location,
   Menu as IconMenu,
@@ -8,11 +10,11 @@ import { useUserStore } from '@/store'
 const { userInfo } = storeToRefs(useUserStore())
 
 import vue from '@/assets/vue.svg'
-
 function logout() {
   console.log('User logged out')
 }
 </script>
+
 <template>
   <div class="header">
     <div class="logo">
@@ -25,7 +27,7 @@ function logout() {
         :unique-opened="true"
         :default-active="$route.path"
         :router="true"
-        @select="(index) => $router.push(index)"
+        @select="(index: RouteLocationRaw) => $router.push(index)"
       >
         <el-menu-item index="/">
           <el-icon><location /></el-icon>
@@ -48,6 +50,7 @@ function logout() {
     </div>
   </div>
 </template>
+
 <style scoped>
 @reference 'tailwindcss';
 .header {

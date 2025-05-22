@@ -25,6 +25,7 @@ export default defineConfig({
     }),
     tailwindcss(),
     oxlintPlugin({
+      configFile: '.oxlintrc.json',
       path: 'src'
     })
   ],

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import LayoutHeader from './header.vue'
 </script>
+
 <template>
   <div class="layout">
     <el-container>
@@ -17,6 +18,7 @@ import LayoutHeader from './header.vue'
     </el-container>
   </div>
 </template>
+
 <style scoped>
 @reference 'tailwindcss';
 </style>

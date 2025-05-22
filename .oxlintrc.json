@@ -2,11 +2,8 @@
   "rules": {
     "no-console": "off",
     "no-unused-vars": "warn",
-    "quotes": ["error", "single"],
-    "semi": ["error", "always"],
-    "indent": ["error", 2],
-    "linebreak-style": ["error", "unix"],
-    "eqeqeq": ["error", "always"],
+    "no-var": "error",
+    "eqeqeq": ["error", "always", { "null": "ignore" }],
     "curly": ["error", "all"]
   },
   "extends": [

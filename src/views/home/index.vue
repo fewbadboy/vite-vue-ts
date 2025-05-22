@@ -9,12 +9,8 @@ const { count, userInfo } = storeToRefs(userStore)
 const { increment } = userStore
 
 const date = ref(new Date())
-
-const name = "AAAA"
-console.log(name);
-
-
 </script>
+
 <template>
   <div class="home">
     <h1>Home</h1>
