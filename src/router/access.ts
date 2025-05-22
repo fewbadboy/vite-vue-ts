@@ -1,0 +1,36 @@
+
+import router from "."
+import { useUserStore } from "@/store";
+import NProgress from "nprogress";
+NProgress.configure({ showSpinner: false });
+
+const whiteList = ['/login', '/register']
+console.log('whiteList', whiteList);
+
+router.beforeEach((to, from, next) => {
+  NProgress.start();
+  document.title = to.meta.title || 'Vite Admin'
+  
+  const userStore = useUserStore()
+  const token = userStore.token
+  console.log('hasToken',!!token);
+  
+  const isAuthenticated = true;
+
+  const toDepth = to.path.split('/').length
+  const fromDepth = from.path.split('/').length
+  to.meta.transition = toDepth < fromDepth ? 'slide-right' : 'slide-left'
+
+  if (to.name !== 'Login' && !isAuthenticated) {
+    // Redirect to login page if not authenticated
+    next({ name: 'login' });
+  } else {
+    next();
+  }
+});
+
+router.afterEach((to) => {
+  NProgress.done();
+  console.log(`Navigated to ${to.path}`);
+});
+

@@ -1,0 +1,26 @@
+{
+  "rules": {
+    "no-console": "off",
+    "no-unused-vars": "warn",
+    "quotes": ["error", "single"],
+    "semi": ["error", "always"],
+    "indent": ["error", 2],
+    "linebreak-style": ["error", "unix"],
+    "eqeqeq": ["error", "always"],
+    "curly": ["error", "all"]
+  },
+  "extends": [
+    ".oxlint-typescript.json"
+  ],
+  "env": {
+    "browser": true,
+    "es2022": true,
+    "node": true
+  },
+  "ignorePatterns": [
+    "node_modules/",
+    "dist/",
+    "public/",
+    "src/icons/svg/"
+  ]
+}

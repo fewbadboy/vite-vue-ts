@@ -1,0 +1,6 @@
+{
+  "**/*.{js,mjs,cjs,ts,vue}": [
+    "oxlint --fix --fix-suggestions --fix-dangerously",
+    "prettier --write --ignore-unknown"
+  ]
+}

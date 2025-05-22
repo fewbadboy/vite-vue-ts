@@ -1,0 +1,20 @@
+{
+  "plugins": [
+    {
+      "name": "typescript",
+      "options": {
+        "tsconfig": "./tsconfig.json"
+      }
+    }
+  ],
+  "rules": {
+    "typescript/no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_",
+        "ignoreRestSiblings": true,
+        "varsIgnorePattern": "^_"
+      }
+    ]
+  }
+}
