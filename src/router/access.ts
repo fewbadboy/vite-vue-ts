@@ -1,6 +1,6 @@
 
 import router from "."
-import { useUserStore } from "@/store";
+import { useMenuStore, useUserStore } from "@/store";
 import NProgress from "nprogress";
 NProgress.configure({ showSpinner: false });
 
@@ -10,6 +10,7 @@ console.log('whiteList', whiteList);
 router.beforeEach((to, from, next) => {
   NProgress.start();
   document.title = to.meta.title || 'Vite Admin'
+  const menuStore = useMenuStore()
   
   const userStore = useUserStore()
   const token = userStore.token
@@ -23,8 +24,22 @@ router.beforeEach((to, from, next) => {
 
   if (to.name !== 'Login' && !isAuthenticated) {
     // Redirect to login page if not authenticated
-    next({ name: 'login' });
+    next({ name: 'Login' });
   } else {
+    // Allow access to the route
+    console.log(menuStore.getMenus);
+    menuStore.loadRoutes(['System', 'User', 'Role', 'Organization', 'Menu']);
+    console.log(menuStore.getMenus);
+    menuStore.getMenus.forEach(route => {
+      router.addRoute(route);
+    });
+    router.addRoute({
+      path: '/:pathMatch(.*)*',
+      name: 'NotFound',
+      component: () => import('@/views/not-found/index.vue'),
+    });
+    console.log(router.getRoutes());
+
     next();
   }
 });

@@ -4,7 +4,7 @@ export {}
 
 declare module 'vue-router' {
   interface RouteMeta {
-    title: string
+    title?: string
     icon?: string
     hidden?: boolean
     noCache?: boolean
@@ -18,8 +18,22 @@ declare module 'vue-router' {
 /**
  * User information interface
  */
-export interface UserInfo {
+export interface UserInfoType {
   name: string
   avatar: string
-  roles: string[]
+  roles: string[],
+  menus: string[]
+}
+
+export interface Quaternion {
+  w: number;
+  x: number;
+  y: number;
+  z: number;
+}
+
+export interface EulerAngles {
+  roll: number;
+  pitch: number;
+  yaw: number;
 }

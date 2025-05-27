@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { parseDate, fromNow } from '@/utils'
 import { storeToRefs } from 'pinia'
 import { useUserStore } from '@/store'
 import SvgIcon from '@/components/SvgIcon.vue'
@@ -9,6 +10,7 @@ const { count, userInfo } = storeToRefs(userStore)
 const { increment } = userStore
 
 const date = ref(new Date())
+const iconName = ref('home')
 </script>
 
 <template>
@@ -16,7 +18,7 @@ const date = ref(new Date())
     <h1>Home</h1>
     <p class="text-3xl font-bold underline red">
       <SvgIcon
-        icon-class="home"
+        :icon-class="iconName"
       />
       Vite + Vue + TypeScript + Pinia + Vue Router
     </p>
@@ -25,9 +27,16 @@ const date = ref(new Date())
     <div>百分数：<span>{{ $n(0.99123, 'percent') }}</span></div>
     <div>十进制：<span>{{ $n(12131415.11612345, 'decimal') }}</span></div>
     <div>钱包：<span>{{ $n(2048, 'currency') }}</span></div>
+    <div>DayJS: {{ parseDate(Date.now()) }} - {{ fromNow(new Date('2025-05-25 12:00:00')) }}</div>
     <div>
       <span>{{ count }}</span>
     </div>
+    <RouterLink
+      to="/not-found"
+      class="text-blue-500 hover:underline"
+    >
+      Go to 404 Page
+    </RouterLink
     <el-date-picker
       v-model="date"
       type="datetime"
@@ -38,13 +47,8 @@ const date = ref(new Date())
 </template>
 
 <style scoped>
-@reference 'tailwindcss';
-
 .home {
   text-align: center;
   padding: 2rem;
-}
-.red {
-  @apply text-red-500;
 }
 </style>

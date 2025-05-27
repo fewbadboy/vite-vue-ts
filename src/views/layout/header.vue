@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { RouteLocationRaw } from 'vue-router'
-
+import layoutMenu from './layout-menu.vue'
 import {
   Location,
   Menu as IconMenu,
@@ -21,7 +21,8 @@ function logout() {
       <img :src="vue" alt="Logo" />
     </div>
     <div class="nav-bar">
-      <el-menu
+      <layoutMenu />
+      <!-- <el-menu
         mode="horizontal"
         :ellipsis="false"
         :unique-opened="true"
@@ -42,7 +43,7 @@ function logout() {
           <el-menu-item index="/about/company">Company</el-menu-item>
         </el-sub-menu>
         <el-menu-item index="/contact">Contact</el-menu-item>
-      </el-menu>
+      </el-menu> -->
     </div>
     <div class="user-info">
       <p>{{ userInfo.name }}</p>

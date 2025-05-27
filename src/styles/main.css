@@ -1,11 +1,18 @@
 @import "tailwindcss";
+@import './menu.css';
+@import './transition.css';
 
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s ease;
+/* instead of :root */
+@theme {
+  --primary-color: #1d4ed8; /* blue-700 */
+  --secondary-color: #f59e0b; /* amber-500 */
+  --background-color: #f3f4f6; /* gray-200 */
+  --text-color: #111827; /* gray-900 */
+  --border-color: #d1d5db; /* gray-300 */
 }
 
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
+@layer components {
+  .red {
+    @apply text-red-500;
+  }
 }
