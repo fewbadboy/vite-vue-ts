@@ -19,7 +19,6 @@ export const constantRoutes: Array<RouteRecordRaw> = [
   },
   {
     path: '/',
-    name: 'Dashboard',
     component: Layout,
     meta: {
       title: 'Dashboard',
@@ -29,6 +28,7 @@ export const constantRoutes: Array<RouteRecordRaw> = [
     children: [
       {
         path: '',
+        name: 'Dashboard',
         component: () => import('@/views/home/index.vue'),
       }
     ],
@@ -63,6 +63,21 @@ export const constantRoutes: Array<RouteRecordRaw> = [
       }
     ],
   },
+  {
+    path: '/book/:id(\\d+?)',
+    component: () => import('@/views/book/index.vue'),
+    meta: {
+      hidden: true,
+    },
+    children: [
+      // when /user/:id(\\d+?) is matched
+      {
+        path: '',
+        name: 'Book',
+        component: () => import('@/views/book/book-id.vue')
+      }
+    ]
+  },
 ]
 
 export const asyncRoutes: Array<RouteRecordRaw> = [
@@ -72,6 +87,12 @@ export const asyncRoutes: Array<RouteRecordRaw> = [
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: constantRoutes,
+  sensitive: false, // default
+  /**
+   * { path: '/users/:id?' }
+   * will match /users, /Users, /users/42, /users/ and /users/42/
+   */
+  strict: false, // default
   scrollBehavior: () => ({ top: 0 }),
 })
 

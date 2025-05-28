@@ -38,7 +38,7 @@ function handleSelect(index: RouteLocationRaw) {
         :index="handleIndex(item.path)"
       >
         <SvgIcon :icon-class="item.meta?.icon" />
-        <span class="ml-2">{{ item.name }}</span>
+        <span class="ml-2">{{ item.name || item.meta?.title }}</span>
       </el-menu-item>
       <el-sub-menu
         v-else

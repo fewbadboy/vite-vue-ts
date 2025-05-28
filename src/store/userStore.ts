@@ -3,6 +3,10 @@ import { defineStore } from "pinia";
 import { login, getUserInfo } from "@/api/user";
 import type { UserInfoType } from "@/global";
 
+/**
+ * store.$patch({ count: store.count + 1 })
+ * store.$patch((state) => { state.roles.push('guest') }) // 集合修改
+ */
 export const useUserStore = defineStore('user', () => {
   const count = ref(0)
   const token = ref("")

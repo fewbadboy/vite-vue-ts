@@ -1,16 +1,22 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { parseDate, fromNow } from '@/utils'
+import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { useUserStore } from '@/store'
+import { parseDate, fromNow } from '@/utils'
 import SvgIcon from '@/components/SvgIcon.vue'
 
+const router = useRouter()
 const userStore = useUserStore()
 const { count, userInfo } = storeToRefs(userStore)
 const { increment } = userStore
 
 const date = ref(new Date())
 const iconName = ref('home')
+
+function toTest() {
+  router.push({ name: 'Book', params: { id: 1 }, query: { id: 1 }})
+}
 </script>
 
 <template>
@@ -36,12 +42,25 @@ const iconName = ref('home')
       class="text-blue-500 hover:underline"
     >
       Go to 404 Page
-    </RouterLink
+    </RouterLink>
+    <RouterLink
+      to="/test/10"
+      class="text-blue-500 hover:underline"
+    >
+      Go to /book/10
+    </RouterLink>
+    <RouterLink
+      to="/test/hello"
+      class="text-blue-500 hover:underline"
+    >
+      Go to /book/hello
+    </RouterLink>
     <el-date-picker
       v-model="date"
       type="datetime"
       placeholder="Select date and time"
     />
+    <el-button type="primary" @click="toTest">/book/1</el-button>
     <el-button type="primary" @click="increment">Increment</el-button>
   </div>
 </template>
