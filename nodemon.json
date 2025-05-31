@@ -1,0 +1,4 @@
+{
+  "watch": ["mock/index.mjs"],
+  "ext": "mjs"
+}

@@ -82,3 +82,7 @@ Tailwind 在底层使用 Lightning CSS 来处理嵌套 CSS
 ```
 
 始终将 props 映射到静态类名
+
+## DevTools
+
+[DevTools](https://devtools.vuejs.org/getting-started/installation#installation)

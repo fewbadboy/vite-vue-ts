@@ -27,9 +27,7 @@ router.beforeEach((to, from, next) => {
     next({ name: 'Login' });
   } else {
     // Allow access to the route
-    console.log(menuStore.getMenus);
     menuStore.loadRoutes(['System', 'User', 'Role', 'Organization', 'Menu']);
-    console.log(menuStore.getMenus);
     menuStore.getMenus.forEach(route => {
       router.addRoute(route);
     });
@@ -38,7 +36,6 @@ router.beforeEach((to, from, next) => {
       name: 'NotFound',
       component: () => import('@/views/not-found/index.vue'),
     });
-    console.log(router.getRoutes());
 
     next();
   }

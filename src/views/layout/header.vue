@@ -1,17 +1,12 @@
 <script setup lang="ts">
-import type { RouteLocationRaw } from 'vue-router'
 import layoutMenu from './layout-menu.vue'
-import {
-  Location,
-  Menu as IconMenu,
-} from '@element-plus/icons-vue'
 import { storeToRefs } from 'pinia'
 import { useUserStore } from '@/store'
 const { userInfo } = storeToRefs(useUserStore())
 
 import vue from '@/assets/vue.svg'
 function logout() {
-  console.log('User logged out')
+  // todo
 }
 </script>
 
@@ -22,28 +17,6 @@ function logout() {
     </div>
     <div class="nav-bar">
       <layoutMenu />
-      <!-- <el-menu
-        mode="horizontal"
-        :ellipsis="false"
-        :unique-opened="true"
-        :default-active="$route.path"
-        :router="true"
-        @select="(index: RouteLocationRaw) => $router.push(index)"
-      >
-        <el-menu-item index="/">
-          <el-icon><location /></el-icon>
-          <span>Home</span>
-        </el-menu-item>
-        <el-sub-menu index="/about">
-          <template #title>
-            <el-icon><icon-menu /></el-icon>
-            <span>About</span>
-          </template>
-          <el-menu-item index="/about/team">Team</el-menu-item>
-          <el-menu-item index="/about/company">Company</el-menu-item>
-        </el-sub-menu>
-        <el-menu-item index="/contact">Contact</el-menu-item>
-      </el-menu> -->
     </div>
     <div class="user-info">
       <p>{{ userInfo.name }}</p>
@@ -55,7 +28,7 @@ function logout() {
 <style scoped>
 @reference 'tailwindcss';
 .header {
-  @apply flex items-center justify-between border-b-2 border-gray-200;
+  @apply flex items-center justify-between inset-shadow-[0_-1px] inset-shadow-gray-200;
 }
 .user-info {
   @apply flex items-center;

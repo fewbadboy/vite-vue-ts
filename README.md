@@ -4,6 +4,12 @@
 
 ```shell
 pnpm install --registry=https://registry.npmmirror.com
+
+# mock server
+pnpm run server
+
+# run project
+pnpm run dev
 ```
 
 ## Browser support

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { useUserStore } from '@/store'
@@ -14,8 +14,18 @@ const { increment } = userStore
 const date = ref(new Date())
 const iconName = ref('home')
 
+onMounted(() => {
+  getMockUser()
+})
+
 function toTest() {
   router.push({ name: 'Book', params: { id: 1 }, query: { id: 1 }})
+}
+
+async function getMockUser() {
+  const response = await fetch('/api/user')
+  const user = await response.json()
+  console.log(user)
 }
 </script>
 
