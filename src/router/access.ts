@@ -15,17 +15,23 @@ router.beforeEach((to, from, next) => {
   console.log('hasToken', !!token)
 
   const isAuthenticated = true
+  /**
+   * '/home/detail' ['', 'home', 'detail']
+   */
+  const toDepth = to.path.split('/').filter(Boolean).length
+  const fromDepth = from.path.split('/').filter(Boolean).length
 
-  const toDepth = to.path.split('/').length
-  const fromDepth = from.path.split('/').length
-  to.meta.transition = toDepth < fromDepth ? 'slide-right' : 'slide-left'
+  if (toDepth === fromDepth) {
+    to.meta.transition = 'fade'
+  } else {
+    to.meta.transition = toDepth > fromDepth ? 'slide-left' : 'slide-right'
+  }
 
   if (to.name !== 'Login' && !isAuthenticated) {
     // Redirect to login page if not authenticated
     next({ name: 'Login' })
   } else {
     // Allow access to the route
-
     next()
   }
 })

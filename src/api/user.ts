@@ -2,9 +2,8 @@ import request from '@/utils/request'
 
 export interface UserInfoType {
   name: string
-  avatar: string
-  roles: string[]
-  menus: string[]
+  address?: string
+  date?: string
 }
 
 export function login(data: { username: string; password: string }) {

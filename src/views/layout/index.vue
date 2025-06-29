@@ -10,7 +10,7 @@ import LayoutHeader from './header.vue'
       </el-header>
       <el-main>
         <router-view v-slot="{ Component, route }">
-          <transition name="fade">
+          <transition :name="route.meta.transition || 'fade'">
             <component :is="Component" :key="route.path" />
           </transition>
         </router-view>
