@@ -15,11 +15,11 @@ const date = ref(new Date())
 const iconName = ref('home')
 
 onMounted(() => {
-  getMockUser()
+  // getMockUser()
 })
 
 function toTest() {
-  router.push({ name: 'Book', params: { id: 1 }, query: { id: 1 }})
+  router.push({ name: 'Book', params: { id: 1 }, query: { id: 1 } })
 }
 
 async function getMockUser() {
@@ -32,37 +32,37 @@ async function getMockUser() {
 <template>
   <div class="home">
     <h1>Home</h1>
-    <p class="text-3xl font-bold underline red">
-      <SvgIcon
-        :icon-class="iconName"
-      />
+    <p class="red text-3xl font-bold underline">
+      <SvgIcon :icon-class="iconName" />
       Vite + Vue + TypeScript + Pinia + Vue Router
     </p>
     <div>I18N: {{ $t('message.hello', { name: userInfo.name }) }}</div>
-    <div>时间：<span>{{ $d(new Date(), 'long') }}</span></div>
-    <div>百分数：<span>{{ $n(0.99123, 'percent') }}</span></div>
-    <div>十进制：<span>{{ $n(12131415.11612345, 'decimal') }}</span></div>
-    <div>钱包：<span>{{ $n(2048, 'currency') }}</span></div>
-    <div>DayJS: {{ parseDate(Date.now()) }} - {{ fromNow(new Date('2025-05-25 12:00:00')) }}</div>
+    <div>
+      时间：<span>{{ $d(new Date(), 'long') }}</span>
+    </div>
+    <div>
+      百分数：<span>{{ $n(0.99123, 'percent') }}</span>
+    </div>
+    <div>
+      十进制：<span>{{ $n(12131415.11612345, 'decimal') }}</span>
+    </div>
+    <div>
+      钱包：<span>{{ $n(2048, 'currency') }}</span>
+    </div>
+    <div>
+      DayJS: {{ parseDate(Date.now()) }} -
+      {{ fromNow(new Date('2025-05-25 12:00:00')) }}
+    </div>
     <div>
       <span>{{ count }}</span>
     </div>
-    <RouterLink
-      to="/not-found"
-      class="text-blue-500 hover:underline"
-    >
+    <RouterLink to="/not-found" class="text-blue-500 hover:underline">
       Go to 404 Page
     </RouterLink>
-    <RouterLink
-      to="/test/10"
-      class="text-blue-500 hover:underline"
-    >
+    <RouterLink to="/test/10" class="text-blue-500 hover:underline">
       Go to /book/10
     </RouterLink>
-    <RouterLink
-      to="/test/hello"
-      class="text-blue-500 hover:underline"
-    >
+    <RouterLink to="/test/hello" class="text-blue-500 hover:underline">
       Go to /book/hello
     </RouterLink>
     <el-date-picker

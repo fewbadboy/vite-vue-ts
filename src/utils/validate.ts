@@ -17,7 +17,8 @@ export function validPhone(phone: string): boolean {
  * @returns {Boolean}
  */
 export function validEmail(email: string): boolean {
-  const reg = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  const reg =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
   return reg.test(email)
 }
 
@@ -38,8 +39,9 @@ export function validURL(url: string): boolean {
  * @param {string} ip
  * @returns {boolean}
  */
-export function validateIP(ip: string): boolean {
-  const ipv4 = /^(?=(\b|\D))((\d|([1-9]\d)|(1\d{1,2})|(2[0-4]\d)|(25[0-5]))\.){3}((\d)|([1-9]\d)|(\d{1,2})|(1\d{1,2})|(2[0-4]\d)|(25[0-5]))(?=(\b|\D))$/
+export function validIP(ip: string): boolean {
+  const ipv4 =
+    /^(?=(\b|\D))((\d|([1-9]\d)|(1\d{1,2})|(2[0-4]\d)|(25[0-5]))\.){3}((\d)|([1-9]\d)|(\d{1,2})|(1\d{1,2})|(2[0-4]\d)|(25[0-5]))(?=(\b|\D))$/
   const ipv6 = /^([\\da-fA-F]{1,4}:){7}([\\da-fA-F]{1,4})$/
   return ipv4.test(ip.trim()) || ipv6.test(ip.trim())
 }
@@ -62,7 +64,7 @@ export function validPort(port: number): boolean {
  */
 export function validSpace(string: string): boolean {
   const reg = /^(?!\s*$).+/
-  return reg.test(string)
+  return !reg.test(string)
 }
 
 /**
@@ -75,6 +77,3 @@ export function validPositiveInteger(number: number): boolean {
   const reg = /^[1-9]\d*$/
   return reg.test(String(number))
 }
-
-
-

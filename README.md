@@ -10,6 +10,10 @@ pnpm run server
 
 # run project
 pnpm run dev
+
+# update
+# pnpm up axios@latest
+pnpm up --latest
 ```
 
 ## Browser support
