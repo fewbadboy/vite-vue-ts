@@ -1,14 +1,11 @@
-import {
-  createRouter,
-  createWebHistory,
-} from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 import type { RouteRecordRaw } from 'vue-router'
 
 import { systemRoutes } from './modules/system'
 
 import Layout from '@/views/layout/index.vue'
 
-export const constantRoutes: Array<RouteRecordRaw> = [
+export const routes: Array<RouteRecordRaw> = [
   {
     path: '/login',
     name: 'Login',
@@ -20,73 +17,54 @@ export const constantRoutes: Array<RouteRecordRaw> = [
   {
     path: '/',
     component: Layout,
-    meta: {
-      title: 'Dashboard',
-      icon: 'home',
-      roles: ['admin', 'editor'],
-    },
     children: [
       {
         path: '',
         name: 'Dashboard',
         component: () => import('@/views/home/index.vue'),
-      }
+      },
     ],
   },
   {
     path: '/about',
     name: 'About',
     component: Layout,
-    meta: {
-      title: 'About',
-      icon: 'home',
-      roles: ['admin', 'editor'],
-    },
     children: [
       {
         path: 'team',
         name: 'Team',
         component: () => import('@/views/about/team.vue'),
-        meta: {
-          title: 'Team',
-          roles: ['admin', 'editor'],
-        },
       },
       {
         path: 'company',
         name: 'Company',
         component: () => import('@/views/about/company.vue'),
-        meta: {
-          title: 'Company',
-          roles: ['admin', 'editor'],
-        },
-      }
+      },
     ],
   },
   {
     path: '/book/:id(\\d+?)',
     component: () => import('@/views/book/index.vue'),
-    meta: {
-      hidden: true,
-    },
     children: [
       // when /user/:id(\\d+?) is matched
       {
         path: '',
         name: 'Book',
-        component: () => import('@/views/book/book-id.vue')
-      }
-    ]
+        component: () => import('@/views/book/book-id.vue'),
+      },
+    ],
   },
-]
-
-export const asyncRoutes: Array<RouteRecordRaw> = [
-  ...systemRoutes
+  ...systemRoutes,
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    component: () => import('@/views/not-found/index.vue'),
+  },
 ]
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes: constantRoutes,
+  routes,
   sensitive: false, // default
   /**
    * { path: '/users/:id?' }

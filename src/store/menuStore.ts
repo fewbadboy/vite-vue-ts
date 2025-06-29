@@ -1,82 +1,47 @@
+import type { MenuType } from '@/api/menu'
 import { defineStore } from 'pinia'
-import type { RouteRecordRaw } from 'vue-router'
-import { constantRoutes, asyncRoutes } from '@/router'
-
-/**
- * 检查用户是否有权限访问特定路由
- * 先匹配 route.name，如果没有匹配到，则匹配 route.meta.title
- * @param menusName - Array of menu names that the user has access to
- * @param route - The route record to check
- * @return boolean - Returns true if the user has permission, false otherwise
- * */
-function hasPermission(menusName: string[], route: RouteRecordRaw): boolean {
-  return !!(
-    menusName.includes(route.name! as string) ||
-    (route.meta?.title && menusName.includes(route.meta.title))
-  )
-}
-
-/**
- * 过滤路由
- * @param routes - Array of route records to filter
- * @param menusName - Array of menu names that the user has access to
- * @return Filtered array of route records
- */
-function filterRoutes(
-  routes: Array<RouteRecordRaw>,
-  menusName: string[],
-): Array<RouteRecordRaw> {
-  const filteredRoutes: Array<RouteRecordRaw> = []
-  routes.forEach((route) => {
-    const tempRoute = { ...route }
-    if (hasPermission(menusName, tempRoute)) {
-      if (tempRoute.children) {
-        tempRoute.children = filterRoutes(tempRoute.children, menusName)
-      }
-      filteredRoutes.push(tempRoute)
-    }
-  })
-  return filteredRoutes
-}
 
 export const useMenuStore = defineStore('menu', {
   state: () => ({
-    constantMenus: [] as Array<RouteRecordRaw>,
-    asyncMenus: [] as Array<RouteRecordRaw>,
+    menus: [
+      { index: '/', title: '主页', icon: 'home' },
+      {
+        index: '/about',
+        title: 'About',
+        icon: 'home',
+        children: [
+          { index: 'team', title: 'Team' },
+          { index: 'company', title: 'Company' },
+        ],
+      },
+      {
+        index: '/system',
+        title: 'System',
+        icon: 'home',
+        children: [
+          { index: 'user', title: 'User' },
+          { index: 'role', title: 'Role' },
+          { index: 'organization', title: 'Organization' },
+          { index: 'menu', title: 'Menu' },
+        ],
+      },
+      {
+        index: '/demo',
+        title: 'Demo',
+        icon: 'home',
+      },
+    ] as MenuType[],
   }),
   getters: {
-    getMenus: (state) => [...state.constantMenus, ...state.asyncMenus],
+    getMenus: (state) => [...state.menus],
   },
   actions: {
-    setConstantMenus(menus: Array<RouteRecordRaw>) {
-      this.constantMenus = menus
+    $reset() {
+      this.menus = []
     },
-    setAsyncMenus(menus: Array<RouteRecordRaw>) {
-      this.asyncMenus = menus
-    },
-    resetMenus() {
-      this.constantMenus = []
-      this.asyncMenus = []
-    },
-    /**
-     * 加载常量菜单
-     */
-    loadConstantMenus() {
-      const filteredRoutes = constantRoutes.filter((route) => {
-        return !route.meta?.hidden
-      })
-      this.setConstantMenus(filteredRoutes)
-    },
-    /**
-     * 获取用户权限路由
-     * @param menusName - Array of menu names that the user has access to
-     * @returns
-     */
-    loadRoutes(menusName: string[]): Array<RouteRecordRaw> {
-      this.loadConstantMenus()
-      const filteredRoutes = filterRoutes([...asyncRoutes], menusName)
-      this.setAsyncMenus(filteredRoutes)
-      return filteredRoutes
+
+    setMenus(menus: MenuType[]) {
+      this.menus = menus
     },
   },
 })
