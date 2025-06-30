@@ -1,4 +1,4 @@
-import Layout from '@/views/layout/index.vue'
+import Layout from '@/layout/index.vue'
 import type { RouteRecordRaw } from 'vue-router'
 
 export const systemRoutes: Array<RouteRecordRaw> = [

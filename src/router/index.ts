@@ -3,7 +3,7 @@ import type { RouteRecordRaw } from 'vue-router'
 
 import { systemRoutes } from './modules/system'
 
-import Layout from '@/views/layout/index.vue'
+import Layout from '@/layout/index.vue'
 
 export const routes: Array<RouteRecordRaw> = [
   {

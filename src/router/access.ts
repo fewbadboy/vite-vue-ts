@@ -16,7 +16,7 @@ router.beforeEach((to, from, next) => {
 
   const isAuthenticated = true
   /**
-   * '/home/detail' ['', 'home', 'detail']
+   * '/home/detail/' ['', 'home', 'detail', '']
    */
   const toDepth = to.path.split('/').filter(Boolean).length
   const fromDepth = from.path.split('/').filter(Boolean).length

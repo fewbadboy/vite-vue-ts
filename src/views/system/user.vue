@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
+import { Search } from '@element-plus/icons-vue'
 import type { UserInfoType } from '@/api/user'
 import PaginationEnhance from '@/components/PaginationEnhance.vue'
 
@@ -68,7 +69,11 @@ function handleSelectionChange(val: UserInfoType[]) {
               </el-select>
             </el-form-item>
             <el-form-item label="关键字">
-              <el-input v-model="formInline.keywords" placeholder="请输入" />
+              <el-input
+                v-model="formInline.keywords"
+                :prefix-icon="Search"
+                placeholder="请输入"
+              />
             </el-form-item>
             <el-form-item class="ml-auto">
               <el-button type="primary" @click="handleFilter">查询</el-button>
