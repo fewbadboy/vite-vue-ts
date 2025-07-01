@@ -1,8 +1,12 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import lineChart from './components/line-chart.vue'
+</script>
 
 <template>
   <div class="dashboard">
-    <div class="item a"></div>
+    <div class="item a">
+      <lineChart />
+    </div>
     <div class="item b"></div>
     <div class="item c"></div>
     <div class="item d"></div>

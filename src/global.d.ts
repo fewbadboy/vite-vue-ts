@@ -1,4 +1,5 @@
 import 'vue-router'
+import type { ECharts } from 'echarts'
 
 export {}
 
@@ -13,4 +14,9 @@ declare module 'vue-router' {
     transition?: string
     roles?: string[]
   }
+}
+
+declare global {
+  type ChartElement = HTMLElement | null
+  type ChartInstance = ECharts | null
 }
