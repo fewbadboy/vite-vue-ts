@@ -1,43 +1,26 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue'
-import { debounce } from 'lodash'
-import * as echarts from 'echarts'
+import { useTemplateRef } from 'vue'
+import { useCharts } from '@/utils/composition'
+import type { EChartsOption } from 'echarts'
 
-const lineChart = ref<ChartElement>(null)
-let myChart: ChartInstance = null
-
-onMounted(() => {
-  myChart = echarts.init(lineChart.value)
-  const option = {
-    xAxis: {
-      type: 'category',
-      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+const lineChart = useTemplateRef<HTMLElement>('lineChart')
+const option: EChartsOption = {
+  xAxis: {
+    type: 'category',
+    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+  },
+  yAxis: {
+    type: 'value',
+  },
+  series: [
+    {
+      data: [150, 230, 224, 218, 135, 147, 260],
+      type: 'line',
     },
-    yAxis: {
-      type: 'value',
-    },
-    series: [
-      {
-        data: [150, 230, 224, 218, 135, 147, 260],
-        type: 'line',
-      },
-    ],
-  }
-  myChart.setOption(option)
-  window.addEventListener('resize', handleResize)
-})
+  ],
+}
 
-onUnmounted(() => {
-  window.removeEventListener('resize', handleResize)
-  if (myChart) {
-    myChart.dispose()
-    myChart = null
-  }
-})
-
-const handleResize = debounce(() => {
-  myChart?.resize()
-})
+useCharts(lineChart, option)
 </script>
 <template>
   <div ref="lineChart" class="h-full"></div>

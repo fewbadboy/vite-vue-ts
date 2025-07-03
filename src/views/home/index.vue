@@ -1,13 +1,30 @@
 <script setup lang="ts">
-import lineChart from './components/line-chart.vue'
+import { reactive, ref } from 'vue'
+import LineChart from './components/line-chart.vue'
+import SayContent from './components/say-content.vue'
+
+const upper = ref('HELLO')
+
+const obj = reactive({
+  content: 'click',
+  count: 0,
+})
+
+function handleClick() {
+  obj.content = 'click again!'
+  obj.count++
+}
 </script>
 
 <template>
   <div class="dashboard">
     <div class="item a">
-      <lineChart />
+      <LineChart />
     </div>
-    <div class="item b"></div>
+    <div class="item b">
+      <el-button @click="handleClick">Default</el-button>
+      <SayContent v-model:title.lower="upper" v-bind="obj" class="red" />
+    </div>
     <div class="item c"></div>
     <div class="item d"></div>
   </div>

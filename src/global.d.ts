@@ -17,6 +17,5 @@ declare module 'vue-router' {
 }
 
 declare global {
-  type ChartElement = HTMLElement | null
   type ChartInstance = ECharts | null
 }
