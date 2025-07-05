@@ -1,12 +1,12 @@
-import type { TemplateRef } from 'vue'
-import { onMounted, onUnmounted } from 'vue'
+import type { Ref, TemplateRef } from 'vue'
+import { onMounted, onUnmounted, watch } from 'vue'
 import { debounce } from 'lodash'
 import type { EChartsOption } from 'echarts'
 import * as echarts from 'echarts'
 
 export function useCharts(
   chartRef: TemplateRef<HTMLElement>,
-  option: EChartsOption,
+  option: Ref<EChartsOption>,
 ) {
   let chartInstance: ChartInstance = null
 
@@ -19,12 +19,24 @@ export function useCharts(
     window.addEventListener('resize', handleResize)
   })
 
-  onUnmounted(() => {})
+  onUnmounted(() => {
+    window.removeEventListener('resize', handleResize)
+    chartInstance?.dispose()
+    chartInstance = null
+  })
+
+  watch(
+    option,
+    () => {
+      chartInstance && chartInstance.setOption(option.value, true)
+    },
+    { deep: true },
+  )
 
   function initChart() {
     if (chartRef.value) {
       chartInstance = echarts.init(chartRef.value)
-      chartInstance.setOption(option)
+      chartInstance.setOption(option.value)
     }
   }
 

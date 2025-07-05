@@ -58,6 +58,11 @@
     "vite-plugin-svg-icons-ng": "^1.4.1",
     "vue-tsc": "^2.2.10"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fewbadboy/vite-vue-ts"
+  },
+  "license": "MIT",
   "pnpm": {
     "overrides": {
       "svgo": "3.3.2"

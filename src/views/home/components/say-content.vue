@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, useAttrs } from 'vue'
+import { ref, onMounted, useAttrs, watchEffect } from 'vue'
 
 defineOptions({ inheritAttrs: false })
 
@@ -24,6 +24,10 @@ const [model, modifiers] = defineModel<string>('title', {
 })
 
 onMounted(() => {})
+
+watchEffect(async () => {
+  console.log('change:', content)
+})
 </script>
 
 <template>
