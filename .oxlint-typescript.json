@@ -1,12 +1,5 @@
 {
-  "plugins": [
-    {
-      "name": "typescript",
-      "options": {
-        "tsconfig": "./tsconfig.json"
-      }
-    }
-  ],
+  "plugins": ["typescript"],
   "rules": {
     "typescript/no-unused-vars": [
       "error",
