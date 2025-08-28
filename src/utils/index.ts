@@ -1,7 +1,14 @@
+import { dayjs } from './extend'
 import type { EulerAngles, Quaternion } from '@/global'
-import dayjs from 'dayjs'
-import relativeTime from 'dayjs/plugin/relativeTime'
-dayjs.extend(relativeTime)
+
+/**
+ * 格式化数字
+ * @param params
+ * @returns
+ */
+export function parseNumber(params: number) {
+  return new Intl.NumberFormat().format(params)
+}
 
 /**
  * 格式化时间戳或 Date 对象为字符串
@@ -9,8 +16,11 @@ dayjs.extend(relativeTime)
  * @description 将时间戳或 Date 对象转换为格式化的字符串
  * @returns string 格式化后的时间字符串，格式为 'YYYY-MM-DD HH:mm:ss'
  */
-export function parseDate(date: number | Date): string {
-  return dayjs(date).format('YYYY-MM-DD HH:mm:ss')
+export function parseDate(
+  date: number | Date,
+  template = 'YYYY-MM-DD HH:mm:ss',
+): string {
+  return dayjs(date).format(template)
 }
 
 /**
@@ -34,11 +44,52 @@ export function byteLength(str: string): number {
 }
 
 /**
+ * 加载图片
+ * @param url
+ * @returns
+ */
+export async function loadImage(url: string) {
+  return await new Promise((resolve, reject) => {
+    const img = new Image()
+    img.src = url
+    Object.assign(img, {
+      onload: () => {
+        resolve(img)
+      },
+      onerror: (error: ErrorEvent) => {
+        reject(error)
+      },
+    })
+  })
+}
+
+/**
+ * 预览图片
+ * @param url
+ * @returns
+ */
+export async function previewImage(file: Blob | File) {
+  const preview = document.querySelector('img')!
+  return await new Promise<void>((resolve, reject) => {
+    const reader = Object.assign(new FileReader(), {
+      onload: () => {
+        preview.src = reader.result as string
+        resolve()
+      },
+      onerror: () => reject(reader.error),
+    })
+    reader.readAsDataURL(file)
+  })
+}
+
+/**
  * websocket 流式数据处理，前端转换成 utf-8 编码的字符串
  * @param {Blob | ArrayBuffer} data
  * @return {Promise<string>} utf-8 编码的字符串
  */
-export async function arrayBufferToString(data: Blob | ArrayBuffer): Promise<string> {
+export async function arrayBufferToString(
+  data: Blob | ArrayBuffer,
+): Promise<string> {
   let arrayBuffer: ArrayBuffer
   if (data instanceof Blob) {
     arrayBuffer = await data.arrayBuffer()

@@ -16,8 +16,8 @@ const msg = ref('Hello Vue 3')
 const [model, modifiers] = defineModel<string>('title', {
   set(value) {
     console.log(modifiers)
-    if (modifiers.lower) {
-      return value.toLowerCase()
+    if (modifiers.upper) {
+      return value.toUpperCase()
     }
     return value
   },
@@ -31,7 +31,7 @@ watchEffect(async () => {
 </script>
 
 <template>
-  <el-input v-model="model" placeholder="请输入" />
+  <el-input v-model="model" placeholder="自动转换大写字母" />
   <div :class="attrs.class">{{ msg }}</div>
   <div>{{ content }} , count: {{ count ?? 0 }}</div>
 </template>

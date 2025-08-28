@@ -3,10 +3,10 @@ import { reactive, ref } from 'vue'
 import LineChart from './components/line-chart.vue'
 import SayContent from './components/say-content.vue'
 
-const upper = ref('HELLO')
+const upper = ref('')
 
 const obj = reactive({
-  content: 'click',
+  content: 'try click Default button',
   count: 0,
 })
 
@@ -22,8 +22,8 @@ function handleClick() {
       <LineChart />
     </div>
     <div class="item b">
-      <el-button @click="handleClick">Default</el-button>
-      <SayContent v-model:title.lower="upper" v-bind="obj" class="red" />
+      <el-button @click="handleClick" class="m-4">Default</el-button>
+      <SayContent v-model:title.upper="upper" v-bind="obj" class="red" />
     </div>
     <div class="item c"></div>
     <div class="item d"></div>

@@ -2,7 +2,7 @@
  * 文件流下载
  * @param fileName
  * @param data
- * @param mineType
+ * @param mineType https://www.iana.org/assignments/media-types/media-types.xhtml
  */
 export function downloadFile(
   fileName: string,

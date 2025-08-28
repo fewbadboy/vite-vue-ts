@@ -26,7 +26,7 @@ Tailwind 在底层使用 Lightning CSS 来处理嵌套 CSS
 
 ### CSS modules
 
-不建议  CSS modules and Tailwind 一起使用
+不建议 CSS modules and Tailwind 一起使用
 
 ### Using arbitrary values
 
