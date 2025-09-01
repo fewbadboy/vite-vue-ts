@@ -1,6 +1,7 @@
 {
   "name": "vite-vue-ts",
   "version": "0.0.1",
+  "description": "a project used vue and typescript etc.",
   "type": "module",
   "scripts": {
     "server": "nodemon mock/index.mjs",

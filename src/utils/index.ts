@@ -101,7 +101,7 @@ export async function arrayBufferToString(
 
 /**
  * 四元数转 rpy
- * @param {Objecr} orientation
+ * @param {Object} orientation
  * @return {String} object
  */
 export function quaternionToEulerAngles(orientation: Quaternion): EulerAngles {
