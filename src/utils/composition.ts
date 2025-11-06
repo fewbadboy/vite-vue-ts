@@ -1,5 +1,5 @@
 import type { Ref, TemplateRef } from 'vue'
-import { onMounted, onUnmounted, watch } from 'vue'
+import { onMounted, onUnmounted } from 'vue'
 import { debounce } from 'lodash'
 import type { EChartsOption } from 'echarts'
 import * as echarts from 'echarts'
@@ -24,14 +24,6 @@ export function useCharts(
     chartInstance?.dispose()
     chartInstance = null
   })
-
-  watch(
-    option,
-    () => {
-      chartInstance && chartInstance.setOption(option.value, true)
-    },
-    { deep: true },
-  )
 
   function initChart() {
     if (chartRef.value) {
