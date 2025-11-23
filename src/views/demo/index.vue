@@ -18,8 +18,8 @@ onMounted(() => {
   // getMockUser()
 })
 
-function toTest() {
-  router.push({ name: 'Book', params: { id: 1 }, query: { id: 1 } })
+function toBook() {
+  router.push({ name: 'book', params: { id: 1 }, query: { id: 1 } })
 }
 
 async function getMockUser() {
@@ -59,10 +59,10 @@ async function getMockUser() {
     <RouterLink to="/not-found" class="text-blue-500 hover:underline">
       Go to 404 Page
     </RouterLink>
-    <RouterLink to="/test/10" class="text-blue-500 hover:underline">
+    <RouterLink to="/book/10" class="text-blue-500 hover:underline">
       Go to /book/10
     </RouterLink>
-    <RouterLink to="/test/hello" class="text-blue-500 hover:underline">
+    <RouterLink to="/book/hello" class="text-blue-500 hover:underline">
       Go to /book/hello
     </RouterLink>
     <el-date-picker
@@ -70,7 +70,7 @@ async function getMockUser() {
       type="datetime"
       placeholder="Select date and time"
     />
-    <el-button type="primary" @click="toTest">/book/1</el-button>
+    <el-button type="primary" @click="toBook">/book/1</el-button>
     <el-button type="primary" @click="increment">Increment</el-button>
   </div>
 </template>

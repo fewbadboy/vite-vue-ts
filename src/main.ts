@@ -1,5 +1,6 @@
 import 'nprogress/nprogress.css'
 import 'virtual:svg-icons/register'
+import 'element-plus/dist/index.css'
 import '@/styles/main.css'
 
 import 'dayjs/locale/zh-cn'

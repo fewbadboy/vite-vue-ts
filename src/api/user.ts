@@ -1,10 +1,5 @@
 import request from '@/utils/request'
-
-export interface UserInfoType {
-  name: string
-  address?: string
-  date?: string
-}
+import type { UserInfoType } from '@/global'
 
 export function login(data: { username: string; password: string }) {
   return request({

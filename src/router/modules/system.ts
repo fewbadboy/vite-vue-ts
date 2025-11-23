@@ -4,38 +4,39 @@ import type { RouteRecordRaw } from 'vue-router'
 export const systemRoutes: Array<RouteRecordRaw> = [
   {
     path: '/system',
-    name: 'System',
+    name: 'system',
     component: Layout,
     children: [
       {
         path: 'user',
-        name: 'User',
+        name: 'user',
         component: () => import('@/views/system/user.vue'),
       },
       {
         path: 'role',
-        name: 'Role',
+        name: 'role',
         component: () => import('@/views/system/role.vue'),
       },
       {
         path: 'organization',
-        name: 'Organization',
+        name: 'organization',
         component: () => import('@/views/system/organization.vue'),
       },
       {
         path: 'menu',
-        name: 'Menu',
+        name: 'menu',
         component: () => import('@/views/system/menu.vue'),
       },
     ],
   },
   {
     path: '/demo',
+    name: 'demo',
     component: Layout,
     children: [
       {
         path: '',
-        name: 'Demo',
+        name: 'demo-main',
         component: () => import('@/views/demo/index.vue'),
       },
     ],

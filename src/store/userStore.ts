@@ -1,7 +1,8 @@
-import { computed, ref } from "vue";
-import { defineStore } from "pinia";
-import { login, getUserInfo } from "@/api/user";
-import type { UserInfoType } from "@/global";
+import type { UserInfoType } from '@/global'
+import { computed, ref } from 'vue'
+import { setCookie } from '@/utils/cookie'
+import { defineStore } from 'pinia'
+import { login, getUserInfo } from '@/api/user'
 
 /**
  * store.$patch({ count: store.count + 1 })
@@ -9,16 +10,21 @@ import type { UserInfoType } from "@/global";
  */
 export const useUserStore = defineStore('user', () => {
   const count = ref(0)
-  const token = ref("")
+  /**
+   * 标记路由加载状态
+   * false 未加载
+   */
+  const isRoutesLoaded = ref(false)
+
   const userInfo = ref<UserInfoType>({
-    name: "Vite Admin",
-    avatar: "",
+    name: 'Vite Admin',
+    avatar: '',
     roles: [],
     menus: [],
   })
 
   const doubleCount = computed(() => count.value * 2)
-  
+
   const increment = () => {
     count.value++
   }
@@ -26,18 +32,18 @@ export const useUserStore = defineStore('user', () => {
   // Reset the store
   function $reset() {
     count.value = 0
-    token.value = ""
     userInfo.value = {
-      name: "",
-      avatar: "",
+      name: '',
+      avatar: '',
       roles: [],
       menus: [],
     }
   }
 
   async function handleLogin() {
-    const { data } = await login({ username: "admin", password: "admin" })
-    token.value = `${data.token_type} ${data.access_token}`
+    const { data } = await login({ username: 'admin', password: 'admin' })
+
+    setCookie(`${data.token_type} ${data.access_token}`)
   }
 
   async function handleGetUserInfo() {
@@ -48,7 +54,7 @@ export const useUserStore = defineStore('user', () => {
 
   return {
     count,
-    token,
+    isRoutesLoaded,
     userInfo,
     doubleCount,
     increment,

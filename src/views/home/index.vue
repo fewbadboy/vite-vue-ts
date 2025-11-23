@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
+import { computed, nextTick, reactive, ref } from 'vue'
 import LineChart from './components/line-chart.vue'
 import SayContent from './components/say-content.vue'
 
@@ -10,9 +10,17 @@ const obj = reactive({
   count: 0,
 })
 
-function handleClick() {
+/**
+ * 计算属性：处理依赖响应式状态的复杂逻辑
+ * 返回一个计算属性 ref
+ */
+const doubleCount = computed(() => obj.count * 2)
+
+async function handleClick(event: Event) {
   obj.content = 'click again!'
   obj.count++
+  await nextTick()
+  console.log('home Component DOM 已经更新完毕', event)
 }
 </script>
 
@@ -22,8 +30,16 @@ function handleClick() {
       <LineChart />
     </div>
     <div class="item b">
-      <el-button @click="handleClick" class="m-4">Default</el-button>
-      <SayContent v-model:title.upper="upper" v-bind="obj" class="red" />
+      <el-button @click="(event: Event) => handleClick(event)" class="m-4"
+        >Increment + 1</el-button
+      >
+      <SayContent
+        v-model:title.upper="upper"
+        :content="obj.content"
+        :count="doubleCount"
+        class="red"
+      />
+      <div>double count: {{ doubleCount }}</div>
     </div>
     <div class="item c"></div>
     <div class="item d"></div>

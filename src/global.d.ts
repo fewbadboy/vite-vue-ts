@@ -2,13 +2,10 @@ import 'vue-router'
 import type { ECharts } from 'echarts'
 
 declare module 'vue-router' {
+  // 继承来自 vue-router 中的 RouteMeta 来为 meta 字段添加类型
   interface RouteMeta {
     title?: string
-    icon?: string
     hidden?: boolean
-    noCache?: boolean
-    affix?: boolean
-    activeMenu?: string
     transition?: string
     roles?: string[]
   }
@@ -16,6 +13,13 @@ declare module 'vue-router' {
 
 declare global {
   type ChartInstance = ECharts | null
+}
+
+export type UserInfoType = {
+  name: string
+  avatar: string
+  roles: string[]
+  menus: string[]
 }
 
 export type Quaternion = {

@@ -5,10 +5,13 @@ import { systemRoutes } from './modules/system'
 
 import Layout from '@/layout/index.vue'
 
-export const routes: Array<RouteRecordRaw> = [
+/**
+ * 路由
+ */
+export const staticRoutes: RouteRecordRaw[] = [
   {
     path: '/login',
-    name: 'Login',
+    name: 'login',
     component: () => import('@/views/login/index.vue'),
     meta: {
       hidden: true,
@@ -20,51 +23,34 @@ export const routes: Array<RouteRecordRaw> = [
     children: [
       {
         path: '',
-        name: 'Dashboard',
+        name: 'dashboard',
         component: () => import('@/views/home/index.vue'),
       },
     ],
   },
   {
     path: '/about',
-    name: 'About',
+    name: 'about',
     component: Layout,
     children: [
       {
         path: 'team',
-        name: 'Team',
+        name: 'team',
         component: () => import('@/views/about/team.vue'),
       },
       {
         path: 'company',
-        name: 'Company',
+        name: 'company',
         component: () => import('@/views/about/company.vue'),
       },
     ],
   },
-  {
-    path: '/book/:id(\\d+?)',
-    component: () => import('@/views/book/index.vue'),
-    children: [
-      // when /user/:id(\\d+?) is matched
-      {
-        path: '',
-        name: 'Book',
-        component: () => import('@/views/book/book-id.vue'),
-      },
-    ],
-  },
   ...systemRoutes,
-  {
-    path: '/:pathMatch(.*)*',
-    name: 'NotFound',
-    component: () => import('@/views/not-found/index.vue'),
-  },
 ]
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes,
+  routes: staticRoutes,
   sensitive: false, // default
   /**
    * { path: '/users/:id?' }

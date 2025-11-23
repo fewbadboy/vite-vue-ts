@@ -4,6 +4,10 @@
 
 Tailwind CSS v4.0 不适用于与 Sass、Less 或 Stylus 等 CSS 预处理器一起使用。
 
+### CSS modules
+
+不建议 CSS modules and Tailwind 一起使用
+
 ### Variables
 
 ```css
@@ -23,10 +27,6 @@ Tailwind 在底层使用 Lightning CSS 来处理嵌套 CSS
   }
 }
 ```
-
-### CSS modules
-
-不建议 CSS modules and Tailwind 一起使用
 
 ### Using arbitrary values
 
