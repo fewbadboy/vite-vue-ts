@@ -110,9 +110,9 @@ request.interceptors.response.use(
   },
   /**
    * response
-   *  data
-   *  status
-   *  headers
+   * data
+   * status
+   * headers
    * message
    * request
    * config

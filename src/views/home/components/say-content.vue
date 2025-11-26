@@ -7,6 +7,7 @@ import {
   reactive,
   type Ref,
   useTemplateRef,
+  defineAsyncComponent,
 } from 'vue'
 
 type SayType = {
@@ -30,8 +31,10 @@ type tempReactType = {
  */
 const { content, count } = defineProps<SayType>()
 
+// 禁止自动继承 Attributes
 defineOptions({ inheritAttrs: false })
 
+// 获取所有透传的 attributes
 const attrs = useAttrs()
 
 const [model, modifiers] = defineModel<string>('title', {
@@ -44,10 +47,21 @@ const [model, modifiers] = defineModel<string>('title', {
   },
 })
 
+// 声明触发的事件
+const emit = defineEmits({
+  custom: ({ email, sure }) => {
+    if (email && sure) {
+      return true
+    } else {
+      return false
+    }
+  },
+})
+
 // 模板引用
 const d = useTemplateRef('dRef')
 
-const msg = ref<string>('Hello Vue 3')
+const msg: Ref<string> = ref<string>('Hello Vue 3')
 
 /**
  * ref
@@ -72,6 +86,11 @@ const re = reactive<tempReactType>({
 
 const { li } = arr.value
 
+// 异步组件加载
+const AsyncRole = defineAsyncComponent(
+  () => import('@/components/HelloWorld.vue'),
+)
+
 onMounted(() => {
   d.value?.focus()
 
@@ -84,7 +103,6 @@ onMounted(() => {
 })
 
 watchEffect(async () => {
-  // 3.5+ props 中的 俩解构变化时重新执行
   console.log(`组件内监听传递 prop: ${content} & ${count}`)
 })
 </script>
@@ -95,11 +113,15 @@ watchEffect(async () => {
   <div ref="dRef">
     {{ content }} , double count in component: {{ count ?? 0 }}
   </div>
+  <AsyncRole :msg="'AsyncRole'" />
   <ul>
     <template v-for="item of li" :key="item">
       <li v-if="item < 5">{{ item }}</li>
     </template>
   </ul>
+  <div>
+    <slot></slot>
+  </div>
   <el-space>
     <el-tag v-if="arr.name" type="primary">{{ arr.name }}</el-tag>
     <el-tag v-if="re.name" type="primary">{{ re.name }}</el-tag>

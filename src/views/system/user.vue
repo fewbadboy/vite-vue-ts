@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { Search } from '@element-plus/icons-vue'
-import type { UserInfoType } from '@/api/user'
+import type { UserInfoType } from '@/global'
 import PaginationEnhance from '@/components/PaginationEnhance.vue'
 
 const formInline = reactive({

@@ -65,8 +65,6 @@ export async function canAccessPage(to: RouteLocationNormalized) {
 
       // 标记已添加了路由
       isRoutesLoaded.value = true
-
-      return to
     } catch (error) {
       console.log(error)
       // TODO
@@ -86,5 +84,6 @@ export async function canAccessPage(to: RouteLocationNormalized) {
   }
 
   // TODO:设置权限等操作
+
   return true
 }

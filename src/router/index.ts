@@ -19,6 +19,7 @@ export const staticRoutes: RouteRecordRaw[] = [
   },
   {
     path: '/',
+    name: 'home',
     component: Layout,
     children: [
       {

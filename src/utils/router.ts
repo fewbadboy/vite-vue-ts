@@ -1,20 +1,29 @@
 import type { RouteRecordRaw } from 'vue-router'
 import router, { staticRoutes } from '@/router'
 
+function routerNames(route: RouteRecordRaw, names: string[]) {
+  if (route.name) {
+    names.push(route.name as string)
+  }
+  if (route.children) {
+    route.children.forEach((child) => routerNames(child, names))
+  }
+}
+
+function getStaticRoutesName(staticRoutes: RouteRecordRaw[]) {
+  const names: string[] = []
+  staticRoutes.forEach((route) => routerNames(route, names))
+  return names
+}
+
 /**
  * 移除动态添加的路由(通过路由中设置的 name 属性)
  */
 export function removeAddedRouter() {
-  const addedRoutes = router
-    .getRoutes()
-    .filter((r) => !staticRoutes.some((s) => s.path === r.path))
-
-  /**
-   * 动态添加的路由都得存在 name 属性
-   */
-  addedRoutes.forEach((r) => {
-    if (r.name) {
-      router.removeRoute(r.name)
+  const staticRoutesNames = getStaticRoutesName(staticRoutes)
+  router.getRoutes().forEach((route) => {
+    if (route.name && !staticRoutesNames.includes(route.name as string)) {
+      router.removeRoute(route.name)
     }
   })
 }

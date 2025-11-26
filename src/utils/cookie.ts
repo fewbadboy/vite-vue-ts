@@ -7,7 +7,7 @@ export function getCookie() {
 }
 
 export function setCookie(value: string) {
-  Cookie.set(tokenName, value, { expires: 1 / 24 }) // 1 h
+  Cookie.set(tokenName, value, { expires: 1 / (24 * 6) }) // 10 min
 }
 
 export function removeCookie() {
