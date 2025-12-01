@@ -4,6 +4,7 @@ import LineChart from './components/line-chart.vue'
 import SayContent from './components/say-content.vue'
 
 const upper = ref('')
+const open = ref(false)
 
 const obj = reactive({
   content: 'try click Default button',
@@ -42,7 +43,15 @@ async function handleClick(event: Event) {
       <div>double count: {{ doubleCount }}</div>
     </div>
     <div class="item c"></div>
-    <div class="item d"></div>
+    <div id="cPart" class="item d">
+      <el-button @click="" class="m-4">show teleport</el-button>
+      <Teleport defer to="#cPart">
+        <div v-if="open" class="modal">
+          <p>Hello from the modal!</p>
+          <el-button @click="open = false">Close</el-button>
+        </div>
+      </Teleport>
+    </div>
   </div>
 </template>
 
